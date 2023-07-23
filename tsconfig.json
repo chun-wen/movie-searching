@@ -15,7 +15,16 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/Components/*": ["./src/components/*"],
+      "@/Redux/*": ["./src/redux/*"],
+      "@/Saga/*": ["./src/redux/saga/*"],
+      "@/Slice/*": ["./src/redux/slice/*"],
+      "@/Interfaces/*": ["./src/interfaces/*"],
+      "@/Server/*": ["./src/server/*"],
+      "@/Styles/*": ["./src/styles/*"],
+      "@/Image/*": ["./src/images/*"],
+      "@/Hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
