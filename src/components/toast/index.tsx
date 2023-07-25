@@ -1,5 +1,4 @@
 import React from 'react';
-import './style.scss';
 
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/lib/notification/interface';
