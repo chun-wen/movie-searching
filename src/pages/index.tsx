@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 
 import { Skeleton } from 'antd';
-import { clsx } from 'clsx';
 import { isNull } from 'lodash';
 import { useRouter } from 'next/router';
 
