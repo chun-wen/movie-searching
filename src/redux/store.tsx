@@ -6,6 +6,7 @@ import rootSaga from '@/Redux/rootSaga';
 
 import configurationSlice from '@/Slice/configurationSlice';
 import movieSlice from '@/Slice/movieSlice';
+import userSlice from '@/Slice/userSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [
@@ -15,7 +16,8 @@ const middleware = [
 
 const reducer = combineReducers({
   movie:movieSlice,
-  configuration: configurationSlice
+  configuration: configurationSlice,
+  user:userSlice
 })
 
 const store = configureStore({
