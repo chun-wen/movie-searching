@@ -25,7 +25,7 @@
       "@/Interfaces/*": ["src/interfaces/*"],
       "@/Server/*": ["src/server/*"],
       "@/Styles/*": ["src/styles/*"],
-      "@/Image/*": ["src/images/*"],
+      "@/Image/*": ["src/image/*"],
       "@/Hooks/*": ["src/hooks/*"]
     }
   },
