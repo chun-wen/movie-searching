@@ -14,19 +14,21 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "typeRoots": ["./src/@types", "./node_modules/@types"],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/Components/*": ["./src/components/*"],
-      "@/Redux/*": ["./src/redux/*"],
-      "@/Saga/*": ["./src/redux/saga/*"],
-      "@/Slice/*": ["./src/redux/slice/*"],
-      "@/Interfaces/*": ["./src/interfaces/*"],
-      "@/Server/*": ["./src/server/*"],
-      "@/Styles/*": ["./src/styles/*"],
-      "@/Image/*": ["./src/images/*"],
-      "@/Hooks/*": ["./src/hooks/*"]
+      "@/*": ["src/*"],
+      "@/Components/*": ["src/components/*"],
+      "@/Redux/*": ["src/redux/*"],
+      "@/Saga/*": ["src/redux/saga/*"],
+      "@/Slice/*": ["src/redux/slice/*"],
+      "@/Interfaces/*": ["src/interfaces/*"],
+      "@/Server/*": ["src/server/*"],
+      "@/Styles/*": ["src/styles/*"],
+      "@/Image/*": ["src/images/*"],
+      "@/Hooks/*": ["src/hooks/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./src"],
   "exclude": ["node_modules"]
 }
