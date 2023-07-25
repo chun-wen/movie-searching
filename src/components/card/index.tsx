@@ -7,16 +7,22 @@ import { MovieInfo } from '@/interface/I_Movie';
 
 // const { Meta } = CardAntd;
 
-const Card = ({ ...props }: MovieInfo) => {
+interface CardProps extends MovieInfo {
+  onClick: () => void;
+}
+
+const Card = ({ onClick, original_title, poster_path, release_date, ...props }: CardProps) => {
   return (
-    <CardAntd
-      hoverable
-      style={{ width: 240 }}
-      cover={<img alt={props.original_title} src={props.poster_path} />}
-    >
-      <p className='font-bold'>{props.original_title}</p>
-      <p>{dayjs(props.release_date).format('DD/MM/YYYY')}</p>
-    </CardAntd>
+    <div onClick={onClick}>
+      <CardAntd
+        hoverable
+        style={{ width: 240 }}
+        cover={<img alt={original_title} src={poster_path} />}
+      >
+        <p className="font-bold">{original_title}</p>
+        <p>{dayjs(release_date).format('DD/MM/YYYY')}</p>
+      </CardAntd>
+    </div>
   );
 };
 
