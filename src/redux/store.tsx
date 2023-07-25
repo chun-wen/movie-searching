@@ -1,25 +1,24 @@
-import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { combineReducers, configureStore, MiddlewareArray } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
+import thunk from 'redux-thunk';
 
 import rootSaga from '@/Redux/rootSaga';
 
+import configurationSlice from '@/Slice/configurationSlice';
 import movieSlice from '@/Slice/movieSlice';
 
 const sagaMiddleware = createSagaMiddleware();
-
 const middleware = [
-  ...getDefaultMiddleware({
-    thunk: false
-  }),
+  thunk,
   sagaMiddleware
 ];
 
 const reducer = combineReducers({
-  movie:movieSlice
+  movie:movieSlice,
+  configuration: configurationSlice
 })
 
 const store = configureStore({
-  devTools: true,
   reducer,
   middleware
 })
