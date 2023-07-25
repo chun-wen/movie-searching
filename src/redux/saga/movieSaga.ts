@@ -11,9 +11,7 @@ import { getNowPlaying, getSearchList, setNowPlaying, setSearchList } from '@/Sl
 function* handleGetSearchList(action: PayloadAction<string>) {
   try {
     // get search result
-    const res: AxiosResponse<RootResponse> = yield call(getMovie.getSearchList, {
-      query: action.payload,
-    });
+    const res: AxiosResponse<RootResponse> = yield call(getMovie.getSearchList, action.payload);
     const { data } = res;
 
     yield put(setSearchList(data));
@@ -31,16 +29,18 @@ function* handleGetNowPlaying() {
     const configurationRes: AxiosResponse<ConfigureRootObject> = yield call(
       getConfigurationApi.getDetails,
     );
-    
-    const { data: configureData } = configurationRes;
+
+    const {
+      data: { images },
+    } = configurationRes;
 
     // mapping image configuration base
     const mappingResult = {
-      ...configureData,
+      ...data,
       results: data.results.map((item) => {
         return {
           ...item,
-          poster_path: `${configureData.images.secure_base_url}${configureData.images.poster_sizes[4]}/${item.poster_path}`,
+          poster_path: `${images.secure_base_url}${images.poster_sizes[4]}/${item.poster_path}`,
         };
       }),
     };
