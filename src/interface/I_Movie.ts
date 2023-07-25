@@ -1,15 +1,15 @@
-export interface RootResponse {
+interface RootResponse {
   page: number;
-  results: MovieDetail[];
+  results: MovieInfo[];
   total_pages: number;
   total_results: number;
 }
 
-export interface MovieListResponse extends RootResponse {
+interface MovieNowPlayingResponse extends RootResponse {
   dates: Dates;
 }
 
-export interface MovieDetail {
+interface MovieInfo {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -26,9 +26,14 @@ export interface MovieDetail {
   vote_count: number;
 }
 
-export interface Dates {
+interface Dates {
   maximum: Date;
   minimum: Date;
+}
+
+interface SearchProps {
+  query: SortField;
+  region: string;
 }
 
 export enum OriginalLanguage {
@@ -36,3 +41,14 @@ export enum OriginalLanguage {
   Es = 'es',
   Uk = 'uk',
 }
+
+export enum SortBy {
+  Asc = 'asc',
+  Desc = 'desc',
+}
+
+export enum SortField {
+  poupularity_asc = 'popularity.asc',
+}
+
+export type { RootResponse, MovieNowPlayingResponse, MovieInfo, Dates, SearchProps };
