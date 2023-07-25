@@ -8,7 +8,6 @@ export interface MovieState {
   searchList: MovieInfo[];
   movie_nowPlayingList: MovieInfo[];
   isloading: boolean;
-  configuration: ConfigureRootObject;
 }
 
 // Define the initial state using that type
@@ -22,7 +21,6 @@ const initialState: MovieState = {
   searchList: [] as MovieInfo[],
   movie_nowPlayingList: [] as MovieInfo[],
   isloading: true,
-  configuration: {} as ConfigureRootObject
 };
 
 export const movieSlice = createSlice({
