@@ -26,7 +26,8 @@
       "@/Server/*": ["src/server/*"],
       "@/Styles/*": ["src/styles/*"],
       "@/Image/*": ["src/image/*"],
-      "@/Hooks/*": ["src/hooks/*"]
+      "@/Hooks/*": ["src/hooks/*"],
+      "@/Utils/*": ["src/utils/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./src"],
