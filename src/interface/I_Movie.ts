@@ -42,9 +42,9 @@ export enum OriginalLanguage {
   Uk = 'uk',
 }
 
-export enum SortBy {
-  Asc = 'asc',
-  Desc = 'desc',
+export enum SortOrder {
+  Asc = 'ascend',
+  Desc = 'descend',
 }
 
 export enum SortField {
