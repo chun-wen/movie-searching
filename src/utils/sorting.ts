@@ -1,26 +1,36 @@
 import { SortOrder as SortOrderProps } from 'antd/lib/table/interface';
 
-import { MovieInfo, SortOrder } from '@/Interface/I_MovieGeneral';
+import { MovieInfo } from '@/Interface/I_MovieGeneral';
+
+import { SortType } from '@/interface/I_General';
 
 const sortingArray = ({
   data,
-  order,
-  column,
+  sortType,
+  sortField,
 }: {
   data: MovieInfo[];
-  order?: SortOrderProps;
-  column: keyof MovieInfo;
+  sortType?: SortOrderProps;
+  sortField: keyof MovieInfo;
 }) => {
   const result = data.sort((a, b) => {
-    const valueA = a[column];
-    const valueB = b[column];
+    const valueA =
+      sortField === 'release_date'
+        ? Date.parse(a[sortField] as unknown as string)
+        : Number(a[sortField]);
+    const valueB =
+      sortField === 'release_date'
+        ? Date.parse(b[sortField] as unknown as string)
+        : Number(b[sortField]);
 
-    if (typeof valueA === 'number' && typeof valueB === 'number') {
-      return order === SortOrder.Asc ? valueA - valueB : valueB - valueA;
-    } else {
-      // Handle non-numeric properties or any other custom logic here
-      return 0;
-    }
+    return sortType === SortType.ascend ? valueA - valueB : valueB - valueA;
+
+    // if (typeof valueA === 'number' && typeof valueB === 'number') {
+    //   return order === SortType.ascend ? valueA - valueB : valueB - valueA;
+    // } else {
+    //   // Handle non-numeric properties or any other custom logic here
+    //   return 0;
+    // }
   });
 
   return result;
