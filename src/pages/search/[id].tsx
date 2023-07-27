@@ -1,18 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
+import { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
+import { useRouter } from 'next/router';
 
-import Table from '@/components/table';
+import { filterSearchList, getSearchList } from '@/Redux/slices/movieSlice';
+
+import Table, { TableParams } from '@/Components/table';
+import DefaultPageParam from '@/constants/searchDefaultParam';
 import { useAppDispatch, useAppSelector } from '@/hooks';
-import { filterSearchList, setSearchList } from '@/redux/slice/movieSlice';
+import { SortType } from '@/interface/I_General';
+import { MovieInfo } from '@/interface/I_MovieGeneral';
+
+import type {  SorterResult } from 'antd/lib/table/interface';
+type SearchDataType = Pick<MovieInfo, 'poster_path' | 'original_title' | 'original_language' | 'overview' | 'popularity'> & {
+  image: {
+    poster_path: string;
+    original_title: string;
+  }
+}
 
 const SearchPage = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
+  
   const { movieData, searchList } = useAppSelector((state) => state.movie);
   const {images:{secure_base_url, poster_sizes}} = useAppSelector((state) => state.configuration);
-  const [currentPage, setCurrentPage] = useState(1);
+  const { defaultCurrentPage, defaultPageSize, sortType, sortField} = DefaultPageParam;
 
-  const columns = [
+  const defaultPageParam = {
+    current: defaultCurrentPage,
+    pagesize: defaultPageSize,
+    sortType,
+    sortField
+  }
+
+  const [filterParams, setFilterParams] = useState<TableParams>(defaultPageParam);
+
+
+  const columns: ColumnsType<SearchDataType> = [
     {
       title: 'Image',
       dataIndex: 'image',
@@ -26,7 +52,7 @@ const SearchPage = () => {
     },
     { title: 'Title', dataIndex: 'original_title' },
     { title: 'Language', dataIndex: 'original_language' },
-    { title: 'Overview', dataIndex: 'overview', sorter: true },
+    { title: 'Overview', dataIndex: 'overview'},
     { title: 'Popularity', dataIndex: 'popularity', sorter: true },
     {
       title: 'Release',
@@ -48,35 +74,47 @@ const SearchPage = () => {
     };
   });
 
+
   return (
     <>
       <h1>Search Results</h1>
+      {/* TODO: dataSource 為空 */}
       <Table
+        rowKey="searchID"
         dataSource={dataSource}
         columns={columns}
-        onChange={(pagination, filters, sorter, extra) => {
-          if (extra.action === 'sort' && !sorter?.order) {
-            console.log(sorter);
-            dispatch(filterSearchList({
-              order: sorter.order,
-              column: sorter.column,
-              currentPage
-            }));
+        onChange={ (pagination, filters, sorter, extra) => {
+          if (extra.action === 'sort') {
+            const { field, order } = sorter as SorterResult<object>;
+            setFilterParams({
+              ...filterParams,
+              sortType: order ? SortType[order]: undefined,
+              sortField: order ? field as string : undefined
+            });
+
+          dispatch(filterSearchList({
+            ...filterParams,
+            sortType: order ? SortType[order]: undefined,
+            sortField: order ? field as string : undefined
+          }));
+
           }
           if(extra.action === 'paginate'){
-            dispatch(filterSearchList({
-              order: sorter.order,
-              column: sorter.column,
-              currentPage
-            }));
+            const { current} = pagination;
+            setFilterParams({
+              ...filterParams,
+              current
+            });
+            dispatch(getSearchList({query: router.query.id as string , page: current || 1}));
           }
         }}
         pagination={{
-          current: currentPage,
+          current: filterParams.current,
           total: movieData.total_results,
           showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
-          defaultPageSize: 20,
-          showQuickJumper: false
+          defaultPageSize,
+          showQuickJumper: false,
+          showSizeChanger: false
         }}
       />
     </>
