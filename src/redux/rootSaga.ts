@@ -1,8 +1,8 @@
 import { all, fork } from 'redux-saga/effects';
 
-import * as configurationSaga from '@/Saga/configurationSaga';
-import * as movieSaga from '@/Saga/movieSaga';
-import * as userSaga from '@/Saga/userSaga';
+import * as configurationSaga from '@/Sagas/configurationSaga';
+import * as movieSaga from '@/Sagas/movieSaga';
+import * as userSaga from '@/Sagas/userSaga';
 
 export default function* rootSaga() {
   yield all(

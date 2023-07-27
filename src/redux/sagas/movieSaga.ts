@@ -2,11 +2,13 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 
-import { ConfigureRootObject } from '@/interface/I_Configuration';
-import { MovieNowPlayingResponse, RootResponse } from '@/interface/I_Movie';
+import { ConfigureRootObject } from '@/Interface/I_Configuration';
+import { MovieNowPlayingResponse, RootResponse } from '@/Interface/I_Movie';
+
+import { getNowPlaying, getSearchList, setNowPlaying, setSearchList } from '@/Slices/movieSlice';
+
 import getConfigurationApi from '@/server/api/getConfiguration';
 import getMovie from '@/server/api/getmovie';
-import { getNowPlaying, getSearchList, setNowPlaying, setSearchList } from '@/Slice/movieSlice';
 
 function* handleGetSearchList(action: PayloadAction<string>) {
   try {

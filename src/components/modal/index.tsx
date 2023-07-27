@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button, Modal as ModalAntd } from 'antd';
 import { ModalProps as ModalAntdProps } from 'antd/lib/modal';
 
-import { MovieInfo } from '@/interface/I_Movie';
+import { MovieInfo } from '@/Interface/I_Movie';
 
 interface ModalProps extends MovieInfo {
   open: boolean;

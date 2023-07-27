@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SorterResult } from 'antd/es/table/interface';
 
-import { ConfigureRootObject } from '@/interface/I_Configuration';
-import { MovieInfo, MovieNowPlayingResponse, RootResponse, SortOrder } from '@/interface/I_Movie';
-import paginateArray from '@/utils/paginate';
-import sortingArray from '@/utils/sorting';
+import { ConfigureRootObject } from '@/Interface/I_Configuration';
+import { MovieInfo, MovieNowPlayingResponse, RootResponse, SortOrder } from '@/Interface/I_Movie';
+
+import paginateArray from '@/Utils/paginate';
+import sortingArray from '@/Utils/sorting';
 
 export interface MovieState {
   movieData: RootResponse;
@@ -47,8 +48,8 @@ export const movieSlice = createSlice({
       const paginationData = paginateArray({
         data: state.searchList,
         pageSize: 20,
-        pageNumber: action.payload.currentPage
-      })
+        pageNumber: action.payload.currentPage,
+      });
 
       state.searchList = paginationData;
     },

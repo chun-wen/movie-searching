@@ -1,6 +1,6 @@
 import { SortOrder as SortOrderProps } from 'antd/lib/table/interface';
 
-import { MovieInfo, SortOrder } from '@/interface/I_Movie';
+import { MovieInfo, SortOrder } from '@/Interface/I_Movie';
 
 const sortingArray = ({
   data,

@@ -1,4 +1,4 @@
-import { MovieInfo } from '@/interface/I_Movie';
+import { MovieInfo } from '@/Interface/I_Movie';
 
 const paginateArray = ({
   data,
@@ -13,8 +13,5 @@ const paginateArray = ({
   const endIndex = startIndex + pageSize;
   return data.slice(startIndex, endIndex);
 };
-
-
-
 
 export default paginateArray;

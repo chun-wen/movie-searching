@@ -4,8 +4,8 @@ import { notification } from 'antd';
 import { ArgsProps } from 'antd/lib/notification/interface';
 import { isUndefined } from 'lodash';
 
-import errorSvg from '@/Image/error.svg';
-import successSvg from '@/Image/success.svg';
+import errorSvg from '@/Images/error.svg';
+import successSvg from '@/Images/success.svg';
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 

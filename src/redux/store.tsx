@@ -3,10 +3,9 @@ import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
 
 import rootSaga from '@/Redux/rootSaga';
-
-import configurationSlice from '@/Slice/configurationSlice';
-import movieSlice from '@/Slice/movieSlice';
-import userSlice from '@/Slice/userSlice';
+import configurationSlice from '@/Slices/configurationSlice';
+import movieSlice from '@/Slices/movieSlice';
+import userSlice from '@/Slices/userSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [

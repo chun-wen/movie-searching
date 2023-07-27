@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ConfigureRootObject, Images } from '@/interface/I_Configuration';
+import { ConfigureRootObject, Images } from '@/Interface/I_Configuration';
 
 const initialState: ConfigureRootObject = {
   change_keys: [],

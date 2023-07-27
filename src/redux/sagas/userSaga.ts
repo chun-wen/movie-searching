@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { getCollectionMovie, setCollectionMovie } from '../slice/userSlice';
+import { getCollectionMovie, setCollectionMovie } from '../slices/userSlice';
 
 function* getUserCollectionMovie(action: PayloadAction<any>) {
   try {

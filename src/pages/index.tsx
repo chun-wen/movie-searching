@@ -4,13 +4,15 @@ import { Skeleton } from 'antd';
 import { isNull } from 'lodash';
 import { useRouter } from 'next/router';
 
-import Card from '@/components/card';
-import Input from '@/components/input';
-import Modal from '@/components/modal';
+import { MovieInfo } from '@/Interface/I_Movie';
+
+import { getConfiguration } from '@/Redux/slices/configurationSlice';
+import { getNowPlaying, getSearchList, setSearchList } from '@/Redux/slices/movieSlice';
+
+import Card from '@/Components/card';
+import Input from '@/Components/input';
+import Modal from '@/Components/modal';
 import { useAppDispatch, useAppSelector } from '@/hooks';
-import { MovieInfo } from '@/interface/I_Movie';
-import { getConfiguration } from '@/redux/slice/configurationSlice';
-import { getNowPlaying, getSearchList, setSearchList } from '@/redux/slice/movieSlice';
 
 export default function Home() {
   const dispatch = useAppDispatch();
