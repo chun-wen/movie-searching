@@ -1,11 +1,11 @@
-interface RootResponse {
+interface MovieGeneralResponse {
   page: number;
   results: MovieInfo[];
   total_pages: number;
   total_results: number;
 }
 
-interface MovieNowPlayingResponse extends RootResponse {
+interface MovieNowPlayingResponse extends MovieGeneralResponse {
   dates: Dates;
 }
 
@@ -51,4 +51,4 @@ export enum SortField {
   poupularity_asc = 'popularity.asc',
 }
 
-export type { RootResponse, MovieNowPlayingResponse, MovieInfo, Dates, SearchProps };
+export type { MovieGeneralResponse, MovieNowPlayingResponse, MovieInfo, Dates, SearchProps };
