@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 
 import { Skeleton } from 'antd';
 import { isNull } from 'lodash';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import { MovieInfo } from '@/Interface/I_MovieGeneral';
@@ -9,10 +10,18 @@ import { MovieInfo } from '@/Interface/I_MovieGeneral';
 import { getConfiguration } from '@/Redux/slices/configurationSlice';
 import { getNowPlaying, getSearchList, setSearchList } from '@/Redux/slices/movieSlice';
 
-import Card from '@/Components/card';
-import Input from '@/Components/input';
-import Modal from '@/Components/modal';
 import { useAppDispatch, useAppSelector } from '@/hooks';
+
+const Card = dynamic(() => import('@/Components/card'), {
+  ssr: false,
+})
+const Input = dynamic(() => import('@/Components/input'), {
+  ssr: false,
+})
+const Modal = dynamic(() => import('@/Components/modal'), {
+  ssr: false,
+})
+
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -23,7 +32,7 @@ export default function Home() {
   const [currentModalData, setCurrentModalData] = useState<MovieInfo | null>(null);
 
   const onSearch = (value: string) => {
-    dispatch(getSearchList(value));
+    dispatch(getSearchList({query: value, page: 1}));
     router.push(`/search/${value}`);
   };
 
