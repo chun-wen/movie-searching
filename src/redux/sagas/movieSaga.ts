@@ -10,7 +10,7 @@ import { getNowPlaying, getSearchList, setNowPlaying, setSearchList } from '@/Sl
 import getConfigurationApi from '@/server/api/getConfiguration';
 import getMovie from '@/server/api/getmovie';
 
-function* handleGetSearchList(action: PayloadAction<string>) {
+function* handleGetSearchList(action: PayloadAction<{ query: string; page: number }>) {
   try {
     // get search result
     const res: AxiosResponse<MovieGeneralResponse> = yield call(
