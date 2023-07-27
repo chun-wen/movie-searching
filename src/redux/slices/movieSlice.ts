@@ -5,9 +5,11 @@ import { ConfigureRootObject } from '@/Interface/I_Configuration';
 import {
   MovieGeneralResponse,
   MovieInfo,
-  MovieNowPlayingResponse,
-  SortOrder,
+  MovieNowPlayingResponse
 } from '@/Interface/I_MovieGeneral';
+
+import { TableParams } from '@/components/table';
+import handleTableChange from '@/utils/handleTableChange';
 
 import paginateArray from '@/Utils/paginate';
 import sortingArray from '@/Utils/sorting';
@@ -37,26 +39,15 @@ export const movieSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    getSearchList: (state, action: PayloadAction<string>) => undefined,
+    getSearchList: (state, action: PayloadAction<{ query: string; page: number }>) => undefined,
     setSearchList: (state, action: PayloadAction<MovieGeneralResponse>) => {
       state.movieData = action.payload;
       state.searchList = action.payload.results;
       state.isloading = false;
     },
-    filterSearchList: (state, action: PayloadAction<any>) => {
-      const sortingData = sortingArray({
-        data: state.searchList,
-        order: action.payload.order,
-        column: action.payload.column,
-      });
-
-      const paginationData = paginateArray({
-        data: state.searchList,
-        pageSize: 20,
-        pageNumber: action.payload.currentPage,
-      });
-
-      state.searchList = paginationData;
+    filterSearchList: (state, action: PayloadAction<TableParams>) => {
+      const filterSearch = handleTableChange({ ...action.payload, data: state.searchList });
+      state.searchList = filterSearch;
     },
     getNowPlaying: (state) => undefined,
     setNowPlaying: (state, action: PayloadAction<MovieInfo[]>) => {
