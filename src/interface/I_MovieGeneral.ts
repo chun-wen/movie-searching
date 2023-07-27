@@ -41,12 +41,6 @@ export enum OriginalLanguage {
   Es = 'es',
   Uk = 'uk',
 }
-
-export enum SortOrder {
-  Asc = 'ascend',
-  Desc = 'descend',
-}
-
 export enum SortField {
   poupularity_asc = 'popularity.asc',
 }
