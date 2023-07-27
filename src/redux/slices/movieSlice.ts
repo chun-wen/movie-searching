@@ -2,13 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SorterResult } from 'antd/es/table/interface';
 
 import { ConfigureRootObject } from '@/Interface/I_Configuration';
-import { MovieInfo, MovieNowPlayingResponse, RootResponse, SortOrder } from '@/Interface/I_Movie';
+import {
+  MovieGeneralResponse,
+  MovieInfo,
+  MovieNowPlayingResponse,
+  SortOrder,
+} from '@/Interface/I_MovieGeneral';
 
 import paginateArray from '@/Utils/paginate';
 import sortingArray from '@/Utils/sorting';
 
 export interface MovieState {
-  movieData: RootResponse;
+  movieData: MovieGeneralResponse;
   searchList: MovieInfo[];
   movie_nowPlayingList: MovieInfo[];
   isloading: boolean;
@@ -33,7 +38,7 @@ export const movieSlice = createSlice({
   initialState,
   reducers: {
     getSearchList: (state, action: PayloadAction<string>) => undefined,
-    setSearchList: (state, action: PayloadAction<RootResponse>) => {
+    setSearchList: (state, action: PayloadAction<MovieGeneralResponse>) => {
       state.movieData = action.payload;
       state.searchList = action.payload.results;
       state.isloading = false;

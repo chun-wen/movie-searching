@@ -4,7 +4,7 @@ import { Skeleton } from 'antd';
 import { isNull } from 'lodash';
 import { useRouter } from 'next/router';
 
-import { MovieInfo } from '@/Interface/I_Movie';
+import { MovieInfo } from '@/Interface/I_MovieGeneral';
 
 import { getConfiguration } from '@/Redux/slices/configurationSlice';
 import { getNowPlaying, getSearchList, setSearchList } from '@/Redux/slices/movieSlice';

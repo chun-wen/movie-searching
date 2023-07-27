@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 
 import { ConfigureRootObject } from '@/Interface/I_Configuration';
-import { MovieNowPlayingResponse, RootResponse } from '@/Interface/I_Movie';
+import { MovieGeneralResponse, MovieNowPlayingResponse } from '@/Interface/I_MovieGeneral';
 
 import { getNowPlaying, getSearchList, setNowPlaying, setSearchList } from '@/Slices/movieSlice';
 
@@ -13,7 +13,10 @@ import getMovie from '@/server/api/getmovie';
 function* handleGetSearchList(action: PayloadAction<string>) {
   try {
     // get search result
-    const res: AxiosResponse<RootResponse> = yield call(getMovie.getSearchList, action.payload);
+    const res: AxiosResponse<MovieGeneralResponse> = yield call(
+      getMovie.getSearchList,
+      action.payload,
+    );
     const { data } = res;
 
     yield put(setSearchList(data));

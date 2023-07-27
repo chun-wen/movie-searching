@@ -1,4 +1,4 @@
-import { MovieInfo } from '@/Interface/I_Movie';
+import { MovieInfo } from '@/Interface/I_MovieGeneral';
 
 const paginateArray = ({
   data,

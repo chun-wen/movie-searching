@@ -3,7 +3,7 @@ import React from 'react';
 import { Card as CardAntd } from 'antd';
 import dayjs from 'dayjs';
 
-import { MovieInfo } from '@/Interface/I_Movie';
+import { MovieInfo } from '@/Interface/I_MovieGeneral';
 
 // const { Meta } = CardAntd;
 

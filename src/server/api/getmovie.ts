@@ -1,4 +1,4 @@
-import { SearchProps } from '@/Interface/I_Movie';
+import { SearchProps } from '@/Interface/I_MovieGeneral';
 
 import { BasicService } from '../index';
 
