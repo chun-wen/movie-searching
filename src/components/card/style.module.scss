@@ -1,0 +1,30 @@
+.card-container:hover .card-item{
+    @apply block;
+}
+
+.card-item{
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.8;
+    z-index: 2;
+    @apply hidden bg-bg-lightGray cursor-zoom-in;
+
+    &__button{
+        border: 2px solid #cfc7c7;
+        @apply  flex items-center justify-center ;
+    }
+  
+    &:hover {
+        &__button {
+          @apply bg-white;
+        }
+      }
+}
+
+
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    color: black;
+    background: white;
+    border: 2px solid #cfc7c7;
+}
