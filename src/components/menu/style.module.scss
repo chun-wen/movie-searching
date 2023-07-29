@@ -1,0 +1,8 @@
+.ant-menu-horizontal{
+    border: 0px;
+    @apply bg-bg-lightGray;
+}
+
+.ant-menu-light.ant-menu-horizontal >.ant-menu-item:hover::after{
+    @apply border-b-bg-darkGray
+}
