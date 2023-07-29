@@ -42,6 +42,7 @@ const SearchPage = () => {
     {
       title: 'Image',
       dataIndex: 'image',
+      key: 'image',
       render: ({
         poster_path,
         original_title,
@@ -50,17 +51,19 @@ const SearchPage = () => {
         original_title: string;
       }) => <img src={`${secure_base_url}/${poster_sizes[4]}/${poster_path}`} alt={original_title} />,
     },
-    { title: 'Title', dataIndex: 'original_title' },
-    { title: 'Language', dataIndex: 'original_language' },
-    { title: 'Overview', dataIndex: 'overview'},
-    { title: 'Popularity', dataIndex: 'popularity', sorter: true },
+    { title: 'Title', dataIndex: 'original_title', key: 'title' },
+    { title: 'Language', dataIndex: 'original_language', key: 'original_language' },
+    { title: 'Overview', dataIndex: 'overview', key: 'overview' },
+    { title: 'Popularity', dataIndex: 'popularity', key: 'popularity', sorter: true },
     {
       title: 'Release',
       dataIndex: 'release_date',
+      key: 'release_date',
       render: (date: Date) => <p>{dayjs(date).format('DD/MM/YYYY')}</p>,
       sorter: true,
     },
   ];
+  
 
   const dataSource = searchList.map((movie) => {
     const { poster_path, original_title, overview, popularity,original_language } = movie;
@@ -80,7 +83,7 @@ const SearchPage = () => {
       <h1>Search Results</h1>
       {/* TODO: dataSource 為空 */}
       <Table
-        rowKey="searchID"
+        rowKey={(record) => record.id}
         dataSource={dataSource}
         columns={columns}
         onChange={ (pagination, filters, sorter, extra) => {
