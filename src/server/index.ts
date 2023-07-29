@@ -25,10 +25,10 @@ export class BasicService {
         return response;
       },
       function (error) {
-        console.log(error);
         // if (error.status_code === 7) {
         Toast({
-          message: error.status_message,
+          message: error.code,
+          description: error.message,
           status: 'error',
         });
         // }

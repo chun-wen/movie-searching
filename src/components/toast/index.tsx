@@ -3,6 +3,7 @@ import React from 'react';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/lib/notification/interface';
 import { isUndefined } from 'lodash';
+import Image from 'next/image';
 
 import errorSvg from '@/Images/error.svg';
 import successSvg from '@/Images/success.svg';
@@ -15,13 +16,13 @@ interface ToastProps extends ArgsProps {
 }
 
 const Toast = ({ description, duration, message, className, status, ...props }: ToastProps) => {
-  let suffixIcon;
+  let suffixIcon: React.ReactNode;
   switch (status) {
     case 'success':
-      suffixIcon = <img className="toast__icon" src={successSvg} alt="success-svg" />;
+      suffixIcon = <Image  src={successSvg} alt="success-svg" />;
       break;
     case 'error':
-      suffixIcon = <img className="toast__icon" src={errorSvg} alt="error-svg" />;
+      suffixIcon = <Image  src={errorSvg} alt="error-svg" />;
       break;
     default:
       break;
