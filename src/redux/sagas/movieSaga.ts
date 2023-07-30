@@ -62,6 +62,8 @@ function* handleGetNowPlaying() {
       data: { images },
     } = configurationRes;
 
+    const { collectMovie } = yield select((state) => state.user);
+
     // mapping image configuration base
     const mappingResult = {
       ...data,
@@ -69,6 +71,10 @@ function* handleGetNowPlaying() {
         return {
           ...item,
           poster_path: `${images.secure_base_url}${images.poster_sizes[4]}/${item.poster_path}`,
+          isCollet:
+            collectMovie.length === 0
+              ? false
+              : collectMovie.some((collect: MovieInfo) => collect.id === item.id),
         };
       }),
     };
@@ -90,12 +96,17 @@ function* handleGetMovieDetail(action: PayloadAction<{ id: number }>) {
     const [movieInfo, movieCrew, movieReview] = res;
 
     const { images } = yield select((state) => state.configuration);
+    const { collectMovie } = yield select((state) => state.user);
 
     yield put(
       setMovieDetail({
         movieInfo: {
           ...movieInfo.data,
           poster_path: `${images.secure_base_url}${images.poster_sizes[4]}${movieInfo.data.poster_path}`,
+          isCollet:
+            collectMovie.length === 0
+              ? false
+              : collectMovie.some((collect: MovieInfo) => collect.id === movieInfo.data.id),
         },
         movieCrew: movieCrew.data.crew
           .map((item: Cast) => {

@@ -26,15 +26,21 @@ export const userSlice = createSlice({
   reducers: {
     getCollectionMovie: (state) => undefined,
     setCollectionMovie: (state, action: PayloadAction<MovieInfo>) => {
-      // mapping movieData
-      state.collectMovie = [...state.collectMovie, action.payload];
-      state.isloading = false;
+      const isCollect = state.collectMovie.some((item) => item.id === action.payload.id);
 
       Toast({
-        message: '',
-        description: '',
+        message: isCollect ? 'Remove from WatchList Success' : 'Add To WatchList Success',
+        description: isCollect ? 'Already Remove' : 'Already Add',
         status: 'success',
       });
+
+      // mapping movieData
+      if (isCollect) {
+        state.collectMovie = state.collectMovie.filter((item) => item.id === action.payload.id);
+      } else {
+        state.collectMovie = [...state.collectMovie, { ...action.payload, isCollet: true }];
+      }
+      state.isloading = false;
     },
     getCollectionMovieList: (state, action: PayloadAction<MovieGeneralResponse>) => {
       state.collectMovieList = action.payload;
