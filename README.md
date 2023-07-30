@@ -3,7 +3,7 @@ This is a website which contains below features
 - search movies 
 - show discover movies
 - bookmark your movies list
-- pick up random movie when you do not have idea what
+- pick up random movie when you do not have idea
 - show all your collection list
 
 ## Link
