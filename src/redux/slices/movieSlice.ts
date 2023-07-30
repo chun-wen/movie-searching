@@ -9,15 +9,22 @@ import {
 } from '@/Interface/I_MovieGeneral';
 
 import { TableParams } from '@/components/table';
+import { Cast, MovieCreditRootResponse } from '@/interface/I_MovieCredit';
+import { MovieDetailResponse } from '@/interface/I_MovieDetail';
+import { MovieReviewResponse } from '@/interface/I_MovieReview';
 import handleTableChange from '@/utils/handleTableChange';
 
-import paginateArray from '@/Utils/paginate';
-import sortingArray from '@/Utils/sorting';
+export interface ModalMovieDetail {
+  movieInfo: MovieDetailResponse;
+  movieCast: Cast[];
+  movieReview: MovieReviewResponse;
+}
 
 export interface MovieState {
   movieData: MovieGeneralResponse;
   searchList: MovieInfo[];
   movie_nowPlayingList: MovieInfo[];
+  movieDetail: ModalMovieDetail;
   isloading: boolean;
 }
 
@@ -31,6 +38,11 @@ const initialState: MovieState = {
   },
   searchList: [] as MovieInfo[],
   movie_nowPlayingList: [] as MovieInfo[],
+  movieDetail: {
+    movieInfo: {} as MovieDetailResponse,
+    movieCast: [],
+    movieReview: {} as MovieReviewResponse,
+  },
   isloading: true,
 };
 
@@ -49,15 +61,31 @@ export const movieSlice = createSlice({
       const filterSearch = handleTableChange({ ...action.payload, data: state.searchList });
       state.searchList = filterSearch;
     },
+    getMovieDetail: (state, action: PayloadAction<{ id: number }>) => undefined,
+    setMovieDetail: (state, action: PayloadAction<ModalMovieDetail>) => {
+      state.movieDetail = action.payload;
+      state.isloading = false;
+    },
     getNowPlaying: (state) => undefined,
     setNowPlaying: (state, action: PayloadAction<MovieInfo[]>) => {
       state.movie_nowPlayingList = action.payload;
       state.isloading = false;
     },
+    setIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isloading = action.payload;
+    }
   },
 });
 
-export const { getSearchList, getNowPlaying, setSearchList, setNowPlaying, filterSearchList } =
-  movieSlice.actions;
+export const {
+  getSearchList,
+  getNowPlaying,
+  setSearchList,
+  setNowPlaying,
+  filterSearchList,
+  getMovieDetail,
+  setMovieDetail,
+  setIsLoading
+} = movieSlice.actions;
 
 export default movieSlice.reducer;
