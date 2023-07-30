@@ -26,7 +26,6 @@ import { getMovieDetail, getMovieDetailComment } from '@/redux/slices/movieSlice
 import { setCollectionMovie } from '@/redux/slices/userSlice';
 
 import Card, { CardEnum } from '../card';
-import WatchList from '../watchlist';
 
 interface ModalProps extends Pick<MovieInfo, 'id'> {
   open: boolean;
@@ -41,7 +40,6 @@ const Modal = ({ id, open, onCancel }: ModalProps) => {
   } = useAppSelector((state) => state.movie);
   const isLoading = isEmpty(movieInfo) || isEmpty(movieReview);
 
-  const [isCollet, setIsCollect] = useState(false);
 
   const loadMoreData = () => {
     dispatch(
@@ -57,11 +55,10 @@ const Modal = ({ id, open, onCancel }: ModalProps) => {
   }, []);
 
   const { poster_path, title, vote_average, release_date, overview } = movieInfo;
-  console.log('2', movieInfo, movieCrew, movieReview);
 
   return (
     !isLoading && (
-      <ModalAntd centered open={open} onCancel={onCancel} footer={null} width={'auto'}>
+      <ModalAntd centered destroyOnClose open={open} onCancel={onCancel} footer={null} width={'auto'}>
         <Layout>
           <Content style={{ padding: '24px' }}>
             <Row gutter={[16, 16]}>
@@ -83,12 +80,7 @@ const Modal = ({ id, open, onCancel }: ModalProps) => {
                       <p className="pr-2">Score:</p>
                       <span>{vote_average}</span>
                     </div>
-                    <WatchList
-                      isColletProps={false}
-                      onCollect={(movieInfo) => {
-                        dispatch(setCollectionMovie(movieInfo));
-                      }}
-                    />
+                  
                   </div>
                 </div>
                 <div className="header-item">
