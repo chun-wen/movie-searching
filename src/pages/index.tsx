@@ -46,9 +46,9 @@ export default function Home() {
   }, []);
 
   return (
-    // <Suspense fallback={<Skeleton />}>
     <>
       <Input placeholder="Search for a movie..." className="" onSearch={onSearch} />
+      <h2 className="pt-4 font-bold text-3xl">Current Movie Playing</h2>
       <div className="flex gap-4 flex-wrap pt-4 justify-center sm:justify-between">
         {!isloading &&
           movie_nowPlayingList.map((movieInfo) => (
@@ -84,6 +84,5 @@ export default function Home() {
         )}
       </div>
     </>
-    // </Suspense>
   );
 }

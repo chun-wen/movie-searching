@@ -30,7 +30,7 @@ export const userSlice = createSlice({
 
       Toast({
         message: isCollect ? 'Remove from WatchList Success' : 'Add To WatchList Success',
-        description: isCollect ? 'Already Remove' : 'Already Add',
+        description: isCollect ? `Already Remove ${action.payload.original_title}` : `Already Add ${action.payload.original_title}`,
         status: 'success',
       });
 
