@@ -10,15 +10,9 @@ import Table, { TableParams } from '@/Components/table';
 import DefaultPageParam from '@/constants/searchDefaultParam';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { SortType } from '@/interface/I_General';
-import { MovieInfo } from '@/interface/I_MovieGeneral';
+import { MovieInfo, SearchDataType } from '@/interface/I_MovieGeneral';
 
 import type {  SorterResult } from 'antd/lib/table/interface';
-type SearchDataType = Pick<MovieInfo, 'poster_path' | 'original_title' | 'original_language' | 'overview' | 'popularity'> & {
-  image: {
-    poster_path: string;
-    original_title: string;
-  }
-}
 
 const SearchPage = () => {
   const dispatch = useAppDispatch();

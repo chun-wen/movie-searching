@@ -36,6 +36,13 @@ interface SearchProps {
   region: string;
 }
 
+type SearchDataType = Pick<MovieInfo, 'poster_path' | 'original_title' | 'original_language' | 'overview' | 'popularity'> & {
+  image: {
+    poster_path: string;
+    original_title: string;
+  }
+}
+
 export enum OriginalLanguage {
   En = 'en',
   Es = 'es',
@@ -45,4 +52,4 @@ export enum SortField {
   poupularity_asc = 'popularity.asc',
 }
 
-export type { MovieGeneralResponse, MovieNowPlayingResponse, MovieInfo, Dates, SearchProps };
+export type { MovieGeneralResponse, MovieNowPlayingResponse, MovieInfo, Dates, SearchProps,SearchDataType };
