@@ -85,7 +85,7 @@ function* handleGetMovieDetail(action: PayloadAction<{ id: number }>) {
       call(getMovie.getMovieReviews, action.payload.id),
     ]);
 
-    const [movieInfo, movieCast, movieReview] = res;
+    const [movieInfo, movieCrew, movieReview] = res;
 
     const { images } = yield select((state) => state.configuration);
 
@@ -95,7 +95,7 @@ function* handleGetMovieDetail(action: PayloadAction<{ id: number }>) {
           ...movieInfo.data,
           poster_path: `${images.secure_base_url}${images.poster_sizes[4]}${movieInfo.data.poster_path}`,
         },
-        movieCast: movieCast.data,
+        movieCrew: movieCrew.data.crew,
         movieReview: movieReview.data,
       }),
     );

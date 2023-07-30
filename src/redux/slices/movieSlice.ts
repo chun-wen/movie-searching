@@ -1,12 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SorterResult } from 'antd/es/table/interface';
 
 import { ConfigureRootObject } from '@/Interface/I_Configuration';
-import {
-  MovieGeneralResponse,
-  MovieInfo,
-  MovieNowPlayingResponse
-} from '@/Interface/I_MovieGeneral';
+import { MovieGeneralResponse, MovieInfo } from '@/Interface/I_MovieGeneral';
 
 import { TableParams } from '@/components/table';
 import { Cast, MovieCreditRootResponse } from '@/interface/I_MovieCredit';
@@ -16,7 +11,7 @@ import handleTableChange from '@/utils/handleTableChange';
 
 export interface ModalMovieDetail {
   movieInfo: MovieDetailResponse;
-  movieCast: Cast[];
+  movieCrew: Cast[];
   movieReview: MovieReviewResponse;
 }
 
@@ -40,7 +35,7 @@ const initialState: MovieState = {
   movie_nowPlayingList: [] as MovieInfo[],
   movieDetail: {
     movieInfo: {} as MovieDetailResponse,
-    movieCast: [],
+    movieCrew: [],
     movieReview: {} as MovieReviewResponse,
   },
   isloading: true,
@@ -73,7 +68,7 @@ export const movieSlice = createSlice({
     },
     setIsLoading: (state, action: PayloadAction<boolean>) => {
       state.isloading = action.payload;
-    }
+    },
   },
 });
 
@@ -85,7 +80,7 @@ export const {
   filterSearchList,
   getMovieDetail,
   setMovieDetail,
-  setIsLoading
+  setIsLoading,
 } = movieSlice.actions;
 
 export default movieSlice.reducer;
