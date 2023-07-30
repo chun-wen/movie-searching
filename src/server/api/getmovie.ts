@@ -7,8 +7,9 @@ class GetMovieApi extends BasicService {
     this.fetcher.get(`/search/movie`, { params });
   getNowPlaying = () => this.fetcher.get('/movie/now_playing');
   getMovieDetails = (id: number) => this.fetcher.get(`/movie/${id}`);
-  getMovieReviews = (id: number) => this.fetcher.get(`/movie/${id}/reviews`);
-  getMovieCredits = (id: number, page : number = 1) =>
+  getMovieReviews = (id: number, page: number = 1) =>
+    this.fetcher.get(`/movie/${id}/reviews`, { params: { page } });
+  getMovieCredits = (id: number, page: number = 1) =>
     this.fetcher.get(`/movie/${id}/credits?page=${page}`);
 }
 
