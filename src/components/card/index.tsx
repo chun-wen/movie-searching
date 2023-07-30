@@ -26,7 +26,7 @@ const Card = ({
         cover={<img alt={props.original_title} src={props.poster_path} />}
       >
         <p className="font-bold">{props.original_title}</p>
-        <p>{dayjs(props.release_date).format('YYYY-MM-DD')}</p>
+        <p>{dayjs(props.release_date).format('DD/MM/YYYY')}</p>
       </CardAntd>
       <CardAntd
         onClick={onClick}
