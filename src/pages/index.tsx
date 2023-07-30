@@ -50,7 +50,7 @@ export default function Home() {
           movie_nowPlayingList.map((movieInfo) => (
             <div key={movieInfo.id}>
               <Card
-                {...movieInfo}
+                movieInfo={movieInfo}
                 onCollect={(movieInfo) => {
                   dispatch(setCollectionMovie(movieInfo));
                 }}
