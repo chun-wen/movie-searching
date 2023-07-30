@@ -12,10 +12,13 @@ import {
   getNowPlaying,
   getSearchList,
   setIsLoading,
+  setMovieDetail,
   setSearchList
 } from '@/Redux/slices/movieSlice';
 
 import { useAppDispatch, useAppSelector } from '@/hooks';
+import { MovieDetailResponse } from '@/interface/I_MovieDetail';
+import { MovieReviewResponse } from '@/interface/I_MovieReview';
 import { setCollectionMovie } from '@/redux/slices/userSlice';
 
 const Card = dynamic(() => import('@/Components/card'))
@@ -27,6 +30,7 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { movie_nowPlayingList, isloading } = useAppSelector((state) => state.movie);
+  const {collectMovieList} = useAppSelector((state) => state.user)
 
   const [isOpen, setIsOpen] = useState(true);
   const [currentMovieID, serCurrentMovieID] = useState<number | null>(null);
@@ -70,6 +74,11 @@ export default function Home() {
             onCancel={() => {
               serCurrentMovieID(null);
               setIsOpen(false);
+              dispatch(setMovieDetail({
+                movieInfo: {} as MovieDetailResponse,
+                movieCrew: [],
+                movieReview: {} as MovieReviewResponse,
+              }))
             }}
           />
         )}
