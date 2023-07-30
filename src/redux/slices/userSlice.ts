@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { TableParams } from '@/components/table';
+import Toast from '@/components/toast';
 import { MovieGeneralResponse, MovieInfo } from '@/interface/I_MovieGeneral';
 import handleTableChange from '@/utils/handleTableChange';
 
@@ -28,6 +29,12 @@ export const userSlice = createSlice({
       // mapping movieData
       state.collectMovie = [...state.collectMovie, action.payload];
       state.isloading = false;
+
+      Toast({
+        message: '',
+        description: '',
+        status: 'success',
+      });
     },
     getCollectionMovieList: (state, action: PayloadAction<MovieGeneralResponse>) => {
       state.collectMovieList = action.payload;
