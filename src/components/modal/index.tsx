@@ -15,7 +15,7 @@ import { Department } from '@/interface/I_MovieCredit';
 import { getMovieDetail } from '@/redux/slices/movieSlice';
 import { setCollectionMovie } from '@/redux/slices/userSlice';
 
-import Card from '../card';
+import Card, { CardEnum } from '../card';
 import WatchList from '../watchlist';
 
 interface ModalProps extends Pick<MovieInfo, 'id'> {
@@ -39,8 +39,8 @@ const Modal = ({ id, open, onCancel }: ModalProps) => {
     dispatch(getMovieDetail({ id }));
   }, []);
 
-  const { poster_path, title, vote_average, release_date, genres, overview } = movieInfo;
-  console.log('1', movieInfo, movieCrew, movieReview);
+  const { poster_path, title, vote_average, release_date, overview } = movieInfo;
+  console.log('2', movieInfo, movieCrew, movieReview);
 
   return (
     !isLoading && (
@@ -60,7 +60,7 @@ const Modal = ({ id, open, onCancel }: ModalProps) => {
                   </div>
                 </div>
                 <div className="header-item">
-                <h3 className="header-item--subtitle">Score</h3>
+                  <h3 className="header-item--subtitle">Score</h3>
                   <div className="flex flex-row items-center gap-3">
                     <div className="flex flex-row items-center">
                       <p className="pr-2">Score:</p>
@@ -90,10 +90,18 @@ const Modal = ({ id, open, onCancel }: ModalProps) => {
                 </div>
               </Col>
             </Row>
-            ∏{/* Section 2 */}
-            <div style={{ overflowX: 'auto' }}>
-              {/* <Card>
-         </Card> */}
+            {/* Section 2 */}
+            <h3 className="header-item--subtitle pt-4">Popular Casts</h3>
+            <div style={{ overflowX: 'auto' }} className="flex gap-2 py-4">
+              {movieCrew.slice(0,10).map((cast) => {
+                const item = {
+                  profile_path: cast.profile_path || '',
+                  name: cast.name,
+                  popularity: cast.popularity,
+                  id: cast.id,
+                };
+                return <Card cast={item} cardType={CardEnum.Normal} key={item.id} />;
+              })}
             </div>
             {/* Section 3 */}
             <InfiniteScroll
