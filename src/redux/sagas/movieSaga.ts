@@ -95,7 +95,15 @@ function* handleGetMovieDetail(action: PayloadAction<{ id: number }>) {
           ...movieInfo.data,
           poster_path: `${images.secure_base_url}${images.poster_sizes[4]}${movieInfo.data.poster_path}`,
         },
-        movieCrew: movieCrew.data.crew,
+        movieCrew: movieCrew.data.crew
+          .map((item: Cast) => {
+            return {
+              ...item,
+              profile_path: `${images.secure_base_url}${images.poster_sizes[4]}/${item.profile_path}`,
+            };
+          })
+          .filter((item: Cast, index: number, array:Cast[]) => array.findIndex((i) => i.id === item.id) === index)
+          .sort((a: Cast, b: Cast) => b.popularity - a.popularity),
         movieReview: movieReview.data,
       }),
     );
