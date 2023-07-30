@@ -6,7 +6,7 @@ import { MovieGeneralResponse, MovieInfo } from '@/Interface/I_MovieGeneral';
 import { TableParams } from '@/components/table';
 import { Cast, MovieCreditRootResponse } from '@/interface/I_MovieCredit';
 import { MovieDetailResponse } from '@/interface/I_MovieDetail';
-import { MovieReviewResponse } from '@/interface/I_MovieReview';
+import { MovieReviewResponse, MovieReviewResult } from '@/interface/I_MovieReview';
 import handleTableChange from '@/utils/handleTableChange';
 
 export interface ModalMovieDetail {
@@ -69,6 +69,12 @@ export const movieSlice = createSlice({
     setIsLoading: (state, action: PayloadAction<boolean>) => {
       state.isloading = action.payload;
     },
+    getMovieDetailComment: (state, action: PayloadAction<{ id: number; page: number }>) =>
+      undefined,
+    setMovieDetailComment: (state, action: PayloadAction<MovieReviewResponse>) => {
+      state.movieDetail.movieReview = action.payload;
+      state.isloading = false;
+    },
   },
 });
 
@@ -81,6 +87,8 @@ export const {
   getMovieDetail,
   setMovieDetail,
   setIsLoading,
+  getMovieDetailComment,
+  setMovieDetailComment
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

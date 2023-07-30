@@ -6,22 +6,24 @@ import { ConfigureRootObject } from '@/Interface/I_Configuration';
 import {
   MovieGeneralResponse,
   MovieInfo,
-  MovieNowPlayingResponse
+  MovieNowPlayingResponse,
 } from '@/Interface/I_MovieGeneral';
 
 import {
   getMovieDetail,
+  getMovieDetailComment,
   getNowPlaying,
   getSearchList,
   ModalMovieDetail,
   setMovieDetail,
+  setMovieDetailComment,
   setNowPlaying,
-  setSearchList
+  setSearchList,
 } from '@/Slices/movieSlice';
 
 import { Cast } from '@/interface/I_MovieCredit';
 import { MovieDetailResponse } from '@/interface/I_MovieDetail';
-import { MovieReviewResponse } from '@/interface/I_MovieReview';
+import { MovieReviewResponse, MovieReviewResult } from '@/interface/I_MovieReview';
 import getConfigurationApi from '@/server/api/getConfiguration';
 import getMovie from '@/server/api/getmovie';
 
@@ -102,11 +104,48 @@ function* handleGetMovieDetail(action: PayloadAction<{ id: number }>) {
               profile_path: `${images.secure_base_url}${images.poster_sizes[4]}/${item.profile_path}`,
             };
           })
-          .filter((item: Cast, index: number, array:Cast[]) => array.findIndex((i) => i.id === item.id) === index)
+          .filter(
+            (item: Cast, index: number, array: Cast[]) =>
+              array.findIndex((i) => i.id === item.id) === index,
+          )
           .sort((a: Cast, b: Cast) => b.popularity - a.popularity),
-        movieReview: movieReview.data,
+        movieReview: {
+          ...movieReview.data,
+          results: movieReview.data.results.map((review: MovieReviewResult) => {
+            return {
+              ...review,
+              author_details: {
+                ...review.author_details,
+                avatar_path: `${images.secure_base_url}${images.poster_sizes[4]}${review.author_details?.avatar_path}`,
+              },
+            };
+          }),
+        },
       }),
     );
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function* handleGetMovieDetailComment(action: PayloadAction<{ id: number; page: number }>) {
+  try {
+    const res: AxiosResponse<MovieReviewResponse> = yield call(
+      getMovie.getMovieReviews,
+      action.payload.id,
+      action.payload.page,
+    );
+    const { data } = res;
+
+    const { movieReview } = yield select((state) => state.movie.movieDetail);
+
+    const finalResult = {
+      ...movieReview,
+      page: data.page,
+      results: [...movieReview.results, ...data.results],
+    };
+
+    yield put(setMovieDetailComment(finalResult));
   } catch (err) {
     console.error(err);
   }
@@ -122,4 +161,8 @@ export function* watchGetNowPlaying() {
 
 export function* watchGetMovieDetail() {
   yield takeLatest(getMovieDetail.type, handleGetMovieDetail);
+}
+
+export function* watchGetMovieDetailComment() {
+  yield takeLatest(getMovieDetailComment.type, handleGetMovieDetailComment);
 }
