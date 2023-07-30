@@ -3,6 +3,13 @@
     @apply bg-bg-lightGray;
 }
 
-.ant-menu-light.ant-menu-horizontal >.ant-menu-item:hover::after{
+.ant-menu-light.ant-menu-horizontal >.ant-menu-item:hover::after , 
+.ant-menu-light.ant-menu-horizontal >.ant-menu-item-selected::after{
     @apply border-b-bg-darkGray
 }
+
+
+.ant-menu-light.ant-menu-horizontal >.ant-menu-item-selected{
+    @apply text-bg-darkGray
+}
+
