@@ -74,9 +74,10 @@ const SearchPage = () => {
 
   return (
     <>
-      <h1>Search Results</h1>
+      <h1 className="font-bold text-3xl pb-4">Search Results</h1>
       {/* TODO: dataSource 為空 */}
       <Table
+        scroll={{x: 800}}
         rowKey={(record) => record.id}
         dataSource={dataSource}
         columns={columns}

@@ -93,8 +93,8 @@ const CollectPage = () => {
 
   return (
     <>
-      <Row justify="center">
-        <Col xs={24} sm={8}>
+      <Row justify="center" gutter={[16, 16]}>
+        <Col xs={24} md={8}>
           <LuckyWheel
             ref={recommend}
             width="300px"
@@ -118,8 +118,9 @@ const CollectPage = () => {
             }}
           />
         </Col>
-        <Col xs={24} sm={16}>
+        <Col xs={24} md={16}>
           <Table
+            scroll={{x: 800}}
             rowKey={(record) => record.id}
             dataSource={dataSource}
             columns={columns}
