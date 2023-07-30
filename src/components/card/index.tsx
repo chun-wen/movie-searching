@@ -8,16 +8,12 @@ import { MovieInfo } from '@/Interface/I_MovieGeneral';
 
 interface CardProps extends MovieInfo {
   onClick: () => void;
-  onCollect: (id: number, isCollet: boolean) => void;
+  onCollect: (movieInfo: MovieInfo) => void;
 }
 
 const Card = ({
   onClick,
   onCollect,
-  original_title,
-  poster_path,
-  release_date,
-  id,
   ...props
 }: CardProps) => {
   const [isCollet, setIsCollect] = useState(false);
@@ -27,10 +23,10 @@ const Card = ({
       <CardAntd
         hoverable
         style={{ width: 240, height: 460 }}
-        cover={<img alt={original_title} src={poster_path} />}
+        cover={<img alt={props.original_title} src={props.poster_path} />}
       >
-        <p className="font-bold">{original_title}</p>
-        <p>{dayjs(release_date).format('YYYY-MM-DD')}</p>
+        <p className="font-bold">{props.original_title}</p>
+        <p>{dayjs(props.release_date).format('YYYY-MM-DD')}</p>
       </CardAntd>
       <CardAntd
         onClick={onClick}
@@ -45,7 +41,7 @@ const Card = ({
               icon={isCollet ? <MinusOutlined /> : <PlusOutlined />}
               onClick={(e) => {
                 e.stopPropagation();
-                onCollect(id,isCollet );
+                onCollect({...props});
                 setIsCollect(!isCollet);
               }}
             />
