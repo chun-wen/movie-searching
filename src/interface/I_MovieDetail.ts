@@ -24,6 +24,8 @@ interface MovieDetailResponse {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  // determine whether add to watchList Before
+  isCollet: boolean;
 }
 
 interface Genre {

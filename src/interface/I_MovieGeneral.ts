@@ -12,9 +12,9 @@ interface MovieNowPlayingResponse extends MovieGeneralResponse {
 interface MovieInfo {
   adult: boolean;
   backdrop_path: string;
-  genre_ids: number[];
+  genre_ids?: number[];
   id: number;
-  original_language: OriginalLanguage;
+  original_language?: OriginalLanguage;
   original_title: string;
   overview: string;
   popularity: number;
@@ -24,6 +24,8 @@ interface MovieInfo {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  // determine whether add to watchList Before
+  isCollet: boolean;
 }
 
 interface Dates {
